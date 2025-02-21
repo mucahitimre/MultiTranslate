@@ -4,7 +4,7 @@ A modern, user-friendly word translation application built with React that allow
 
 > This project was developed using [Cursor](https://cursor.sh), the world's most powerful AI-powered code editor.
 
-![Word Translator App](screenshot.png)
+![Word Translator App](screenshot.png) 
 
 ## Features
 
