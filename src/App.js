@@ -57,9 +57,9 @@ const TranslationsList = styled.ul`
 `;
 
 const TranslationItem = styled.li`
-  padding: 0.8rem 1rem;
+  padding: ${props => props.inTable ? '0.4rem 0.6rem' : '0.8rem 1rem'};
   border-bottom: 1px solid ${props => props.inTable ? '#e0e0e0' : 'rgba(108, 99, 255, 0.1)'};
-  font-size: 1rem;
+  font-size: ${props => props.inTable ? '0.85rem' : '1rem'};
   
   &:last-child {
     border-bottom: none;
@@ -204,16 +204,17 @@ const TableContainer = styled.div`
 const Table = styled.table`
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 0.5rem;
+  border-spacing: 0 0.2rem;
   background-color: white;
 `;
 
 const Th = styled.th`
   background-color: #6c63ff;
   color: white;
-  padding: 1.2rem 1rem;
+  padding: 0.6rem 0.8rem;
   text-align: left;
   border-bottom: 2px solid #5a52cc;
+  font-size: 0.85rem;
   &:first-child {
     border-top-left-radius: 8px;
   }
@@ -223,22 +224,23 @@ const Th = styled.th`
 `;
 
 const Td = styled.td`
-  padding: 1.5rem 1rem;
+  padding: 0.6rem 0.8rem;
   background-color: ${props => props.isLastTranslation ? '#f8f9ff' : 'white'};
   transition: all 0.3s ease;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
+  font-size: 0.85rem;
 
   &:first-child {
     border-left: 1px solid #e0e0e0;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
 
   &:last-child {
     border-right: 1px solid #e0e0e0;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
   }
 
   ${props => props.isLastTranslation && `
@@ -271,7 +273,7 @@ const TableHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   background-color: #f8f9ff;
   border-bottom: 1px solid #e0e0e0;
 `;
@@ -311,8 +313,8 @@ const DeleteButton = styled.button`
   border: none;
   color: #ff4444;
   cursor: pointer;
-  font-size: 0.9rem;
-  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 4px;
   transition: background-color 0.2s;
   &:hover {
