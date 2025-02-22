@@ -159,9 +159,11 @@ const ClearButton = styled.button`
 
 const LanguageContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   margin-bottom: 1rem;
   position: relative;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const LanguageLabel = styled.label`
@@ -170,7 +172,38 @@ const LanguageLabel = styled.label`
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  flex: 1;
+  width: 45%;
+`;
+
+const SwapButton = styled.button`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #6c63ff;
+  color: #6c63ff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1;
+  padding: 0;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: #6c63ff;
+    color: white;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  &:active {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
 `;
 
 const HistoryButton = styled.button`
@@ -320,37 +353,6 @@ const DeleteButton = styled.button`
   transition: background-color 0.2s;
   &:hover {
     background-color: #ffeeee;
-  }
-`;
-
-const SwapButton = styled.button`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 1px solid #6c63ff;
-  color: #6c63ff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 1;
-  padding: 0;
-  font-size: 1.2rem;
-
-  &:hover {
-    background-color: #6c63ff;
-    color: white;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-
-  &:active {
-    transform: translate(-50%, -50%) scale(0.95);
   }
 `;
 
@@ -648,40 +650,40 @@ function App() {
   return (
     <Container>
       <Title>Word Translator</Title>
+      <LanguageContainer>
+        <LanguageLabel>
+          From:
+          <LanguageSelect
+            value={sourceLang}
+            onChange={(e) => setSourceLang(e.target.value)}
+          >
+            {availableLanguages.map(lang => (
+              <option key={lang.code} value={lang.code}>
+                {lang.name}
+              </option>
+            ))}
+          </LanguageSelect>
+        </LanguageLabel>
+        <SwapButton onClick={handleSwapLanguages} title="Swap languages">
+          ⇄
+        </SwapButton>
+        <LanguageLabel>
+          To:
+          <LanguageSelect
+            value={targetLang}
+            onChange={(e) => setTargetLang(e.target.value)}
+          >
+            {availableLanguages.map(lang => (
+              <option key={lang.code} value={lang.code}>
+                {lang.name}
+              </option>
+            ))}
+          </LanguageSelect>
+        </LanguageLabel>
+      </LanguageContainer>
       <TranslationGrid>
         <Column>
           <ColumnTitle>word</ColumnTitle>
-          <LanguageContainer>
-            <LanguageLabel>
-              From:
-              <LanguageSelect
-                value={sourceLang}
-                onChange={(e) => setSourceLang(e.target.value)}
-              >
-                {availableLanguages.map(lang => (
-                  <option key={lang.code} value={lang.code}>
-                    {lang.name}
-                  </option>
-                ))}
-              </LanguageSelect>
-            </LanguageLabel>
-            <SwapButton onClick={handleSwapLanguages} title="Swap languages">
-              ⇄
-            </SwapButton>
-            <LanguageLabel>
-              To:
-              <LanguageSelect
-                value={targetLang}
-                onChange={(e) => setTargetLang(e.target.value)}
-              >
-                {availableLanguages.map(lang => (
-                  <option key={lang.code} value={lang.code}>
-                    {lang.name}
-                  </option>
-                ))}
-              </LanguageSelect>
-            </LanguageLabel>
-          </LanguageContainer>
           <TranslationBox
             type="text"
             value={inputText}
@@ -692,19 +694,6 @@ function App() {
         </Column>
         <Column>
           <ColumnTitle>translate</ColumnTitle>
-          <LanguageLabel>
-            To:
-            <LanguageSelect
-              value={targetLang}
-              onChange={(e) => setTargetLang(e.target.value)}
-            >
-              {availableLanguages.map(lang => (
-                <option key={lang.code} value={lang.code}>
-                  {lang.name}
-                </option>
-              ))}
-            </LanguageSelect>
-          </LanguageLabel>
           {translations.length > 0 ? (
             <TranslationsList>
               {translations.map((translation, index) => (
